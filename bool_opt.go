@@ -15,7 +15,7 @@ func NewBoolOpt(name string) *BoolOpt {
 	}
 }
 
-func (o *BoolOpt) WithDefailt(value bool) *BoolOpt {
+func (o *BoolOpt) WithDefault(value bool) *BoolOpt {
 	o.defaultValue = value
 	return o
 }
