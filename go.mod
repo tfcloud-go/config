@@ -1,4 +1,4 @@
-module github.com/tfcloud-go/oslo-config
+module github.com/tfcloud-go/config
 
 go 1.15
 

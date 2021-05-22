@@ -7,7 +7,7 @@ Go package for config. Inspired By OpenStack [oslo.config](https://opendev.org/o
 Install package
 
 ```shell
-go get github.com/tfcloud-go/oslo-config
+go get github.com/tfcloud-go/config
 ```
 
 Register configurations
