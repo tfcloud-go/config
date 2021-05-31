@@ -12,19 +12,23 @@ import (
 	"gopkg.in/ini.v1"
 )
 
+func newCfg() *ini.File {
+	return ini.Empty()
+}
+
 type ConfigOpts struct {
 	cfg *ini.File
 }
 
 func newConfigOpts() *ConfigOpts {
 	return &ConfigOpts{
-		cfg: ini.Empty(),
+		cfg: newCfg(),
 	}
 }
 
 func (c *ConfigOpts) ParseFile(file string) error {
 	if c.cfg == nil {
-		c.cfg = ini.Empty()
+		c.cfg = newCfg()
 	}
 
 	if err := c.cfg.Append(file); err != nil {
@@ -40,7 +44,7 @@ func (c *ConfigOpts) RegisterGroup(group *OptGroup) {
 	}
 
 	if c.cfg == nil {
-		c.cfg = ini.Empty()
+		c.cfg = newCfg()
 	}
 
 	n := group.Name()
@@ -174,5 +178,3 @@ func (c *ConfigOpts) GetURI(group, option string) (url.URL, error) {
 	u, err := url.Parse(value)
 	return *u, err
 }
-
-var CONF = newConfigOpts()
