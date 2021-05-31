@@ -5,6 +5,7 @@
 package config
 
 import (
+	"net/url"
 	"strconv"
 	"strings"
 
@@ -68,6 +69,8 @@ func (c *ConfigOpts) RegisterOpt(group *OptGroup, opt interface{}) {
 		c.registerIntOpt(section, v)
 	case *ListOpt:
 		c.registerListOpt(section, v)
+	case *URIOpt:
+		c.registerURIOpt(section, v)
 	}
 }
 
@@ -147,6 +150,29 @@ func (c *ConfigOpts) registerListOpt(section *ini.Section, opt *ListOpt) {
 
 func (c *ConfigOpts) GetList(group, option string) []string {
 	return c.cfg.Section(group).Key(option).Strings(",")
+}
+
+func (c *ConfigOpts) registerURIOpt(section *ini.Section, opt *URIOpt) {
+	if section == nil || opt == nil {
+		return
+	}
+
+	if section.HasKey(opt.Name()) {
+		return
+	}
+
+	value := opt.Default()
+	if value == nil {
+		return
+	}
+	_, _ = section.NewKey(opt.Name(), value.String())
+}
+
+func (c *ConfigOpts) GetURI(group, option string) (url.URL, error) {
+	value := c.cfg.Section(group).Key(option).Value()
+
+	u, err := url.Parse(value)
+	return *u, err
 }
 
 var CONF = newConfigOpts()
