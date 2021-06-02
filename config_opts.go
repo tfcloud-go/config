@@ -71,6 +71,8 @@ func (c *ConfigOpts) RegisterOpt(group *OptGroup, opt interface{}) {
 		c.registerBoolOpt(section, v)
 	case *IntOpt:
 		c.registerIntOpt(section, v)
+	case *FloatOpt:
+		c.registerFloatOpt(section, v)
 	case *ListOpt:
 		c.registerListOpt(section, v)
 	case *URIOpt:
@@ -137,6 +139,23 @@ func (c *ConfigOpts) registerIntOpt(section *ini.Section, opt *IntOpt) {
 
 func (c *ConfigOpts) GetInt(group, option string) (int, error) {
 	return c.cfg.Section(group).Key(option).Int()
+}
+
+func (c *ConfigOpts) registerFloatOpt(section *ini.Section, opt *FloatOpt) {
+	if section == nil || opt == nil {
+		return
+	}
+
+	if section.HasKey(opt.Name()) {
+		return
+	}
+
+	value := strconv.FormatFloat(opt.Default(), "f", -1, 64)
+	_, _ = section.NewKey(opt.Name(), value)
+}
+
+func (c *ConfigOpts) GetFloat(group, option string) (float64, error) {
+	return c.cfg.Section(group).Key(option).Float64()
 }
 
 func (c *ConfigOpts) registerListOpt(section *ini.Section, opt *ListOpt) {
