@@ -1,6 +1,6 @@
 # TFCloud Go Config
 
-Go package for config. Inspired By OpenStack [oslo.config](https://opendev.org/openstack/oslo.config) library.
+Go package for config. Inspired by OpenStack [oslo.config](https://opendev.org/openstack/oslo.config) library.
 
 ## Usage
 

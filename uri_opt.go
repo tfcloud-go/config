@@ -1,6 +1,6 @@
-// copyright 2021 tfcloud co.,ltd. all rights reserved.
-// this source code is licensed under apache-2.0 license
-// that can be found in the license file.
+// Copyright 2021 TFCloud Co.,Ltd. All rights reserved.
+// This source code is licensed under Apache-2.0 license
+// that can be found in the LICENSE file.
 
 package config
 
