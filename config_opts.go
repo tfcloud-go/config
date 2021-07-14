@@ -150,7 +150,7 @@ func (c *ConfigOpts) registerFloatOpt(section *ini.Section, opt *FloatOpt) {
 		return
 	}
 
-	value := strconv.FormatFloat(opt.Default(), "f", -1, 64)
+	value := strconv.FormatFloat(opt.Default(), 'f', -1, 64)
 	_, _ = section.NewKey(opt.Name(), value)
 }
 
